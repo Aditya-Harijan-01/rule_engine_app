@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/auth_page/bindings/auth_page_binding.dart';
+import '../modules/auth_page/views/auth_page_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -15,6 +17,11 @@ class AppPages {
       name: _Paths.HOME,
       page: () => const HomeView(),
       binding: HomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTH_PAGE,
+      page: () => const AuthPageView(),
+      binding: AuthPageBinding(),
     ),
   ];
 }
