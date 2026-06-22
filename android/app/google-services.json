@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "30970778676",
+    "project_id": "rule-engine-app-6deef",
+    "storage_bucket": "rule-engine-app-6deef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30970778676:android:d9e903b0d6247ee510e661",
+        "android_client_info": {
+          "package_name": "com.example.new_rule_engine_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEvqWBjUApa68nMmSV1y9EtBrpu3fFS9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30970778676:android:3c6929f331f7991510e661",
+        "android_client_info": {
+          "package_name": "com.example.rule_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEvqWBjUApa68nMmSV1y9EtBrpu3fFS9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
