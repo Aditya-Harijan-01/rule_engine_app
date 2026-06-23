@@ -29,7 +29,7 @@ class RuleCondition {
     field: map['field'] as String? ?? '',
     operator: RuleOperator.values.firstWhere(
       (e) => e.name == map['operator'],
-      orElse: () => RuleOperator.equals,
+      orElse: () => RuleOperator.greaterThan,
     ),
     value: map['value'],
   );

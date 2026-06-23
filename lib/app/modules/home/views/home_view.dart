@@ -29,9 +29,9 @@ class HomeView extends GetView<HomeController> {
         'color': Colors.green,
       },
       {
-        'title': 'Profile',
-        'subtitle': 'Manage account',
-        'icon': Icons.person,
+        'title': 'Logout',
+        'subtitle': 'Sign out of your account',
+        'icon': Icons.logout,
         'color': Colors.orange,
       },
     ];

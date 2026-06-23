@@ -19,23 +19,51 @@ class ExecuteEventView extends GetView<ExecuteEventController> {
           return StreamBuilder<List<BusinessRule>>(
             stream: controller.rulesRepository.watchAll(),
             builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    'Unable to load rules: ${snapshot.error}',
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              }
+
               final rules = snapshot.data ?? const <BusinessRule>[];
 
               return ListView(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
                 children: [
                   Text(
-                    'Mock event payload',
+                    'Event Payload',
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
-                  TextField(
-                    controller: controller.payloadController,
-                    minLines: 7,
-                    maxLines: 14,
-                    style: const TextStyle(fontFamily: 'monospace'),
-                    decoration: const InputDecoration(
-                      hintText: '{\n  "type": "expense"\n}',
+                  // TextField(
+                  //   controller: controller.payloadController,
+                  //   minLines: 7,
+                  //   maxLines: 14,
+                  //   style: const TextStyle(fontFamily: 'monospace'),
+                  //   decoration: const InputDecoration(
+                  //     hintText: '{\n  "type": "expense"\n}',
+                  //   ),
+                  // ),
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: TextField(
+                      controller: controller.payloadController,
+                      minLines: 8,
+                      maxLines: 12,
+                      style: const TextStyle(
+                        fontFamily: 'monospace',
+                        fontSize: 14,
+                      ),
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                   if (controller.error != null)
