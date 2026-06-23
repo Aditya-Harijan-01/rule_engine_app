@@ -7,6 +7,12 @@ import '../../../data/repositories/rule_repository.dart';
 class RulePageController extends GetxController {
   final repository = RuleRepository();
 
+  final searchText = ''.obs;
+
+  void updateSearch(String value) {
+    searchText.value = value.toLowerCase();
+  }
+
   Future<void> saveRule(BusinessRule rule) async {
     try {
       await repository.save(rule);
