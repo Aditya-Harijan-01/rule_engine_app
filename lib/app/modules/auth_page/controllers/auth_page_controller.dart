@@ -36,8 +36,12 @@ class AuthPageController extends GetxController {
               password: password.text,
             );
         if (userCredential.user != null) {
+          Get.snackbar("Success", "Registration successful.");
           // Navigate to the home page after successful registration
           toggleAuthMode();
+        } else {
+          Get.snackbar("Error", "Registration failed.");
+          errorMessage = 'Registration failed.';
         }
       } else {
         final data = await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -46,6 +50,7 @@ class AuthPageController extends GetxController {
         );
         // print('User signed in: ${data.user?.email}');
         if (data.user != null) {
+          Get.snackbar("Success", "Login successful.");
           // Navigate to the home page after successful login
           box.write('userId', data.user!.uid);
           box.write('userEmail', data.user!.email);

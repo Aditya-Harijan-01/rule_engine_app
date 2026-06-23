@@ -61,19 +61,6 @@ Verify installation:
 flutterfire --version
 ```
 
-If the command is not found, add the Dart pub cache to your PATH.
-
-Windows:
-
-```text
-C:\Users\<username>\AppData\Local\Pub\Cache\bin
-```
-
-macOS/Linux:
-
-```bash
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-```
 
 ---
 

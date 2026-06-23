@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
@@ -9,6 +10,8 @@ class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    final name = box.read('userEmail');
     final cards = [
       {
         'title': 'Rules',
@@ -45,8 +48,8 @@ class HomeView extends GetView<HomeController> {
             children: [
               const SizedBox(height: 10),
 
-              const Text(
-                'Hello, Aditya 👋',
+              Text(
+                'Hello, $name 👋',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),
 
@@ -85,8 +88,9 @@ class HomeView extends GetView<HomeController> {
                           case 'History':
                             Get.toNamed(Routes.HISTORY);
                             break;
-                          case 'Profile':
+                          case 'Logout':
                             // Get.toNamed(Routes.PROFILE);
+                            box.erase();
                             Get.offAllNamed(Routes.AUTH_PAGE);
                             break;
                         }
