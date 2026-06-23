@@ -129,7 +129,7 @@ class RuleEditorController extends GetxController {
 class ConditionDraft {
   final field = TextEditingController();
   final value = TextEditingController();
-  RuleOperator operator = RuleOperator.equals;
+  RuleOperator operator = RuleOperator.greaterThan;
 
   ConditionDraft();
 
