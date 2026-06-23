@@ -7,6 +7,11 @@ class RuleEditorView extends GetView<RuleEditorController> {
   final BusinessRule? rule;
 
   RuleEditorView({this.rule, super.key}) {
+    if (Get.isRegistered<RuleEditorController>()) {
+      try {
+        Get.delete<RuleEditorController>(force: true);
+      } catch (_) {}
+    }
     Get.put(RuleEditorController(initialRule: rule));
   }
 
