@@ -2,6 +2,337 @@
 
 A Flutter application for building, executing, and auditing business rules with Firebase-backed storage and GetX navigation.
 
+# Flutter & Firebase CLI Setup
+
+## Prerequisites
+
+Install the following:
+
+### Flutter SDK
+
+This project was developed and tested with:
+
+```bash
+Flutter 3.41.4 • channel stable
+Framework • revision ff37bef603
+Dart 3.11.1
+```
+
+Verify installation:
+
+```bash
+flutter --version
+flutter doctor
+```
+
+Ensure all Flutter Doctor checks pass before continuing.
+
+### Firebase CLI
+
+Install Firebase CLI globally:
+
+```bash
+npm install -g firebase-tools
+```
+
+Verify installation:
+
+```bash
+firebase --version
+```
+
+Login to Firebase:
+
+```bash
+firebase login
+```
+
+### FlutterFire CLI
+
+Install FlutterFire CLI:
+
+```bash
+dart pub global activate flutterfire_cli
+```
+
+Verify installation:
+
+```bash
+flutterfire --version
+```
+
+If the command is not found, add the Dart pub cache to your PATH.
+
+Windows:
+
+```text
+C:\Users\<username>\AppData\Local\Pub\Cache\bin
+```
+
+macOS/Linux:
+
+```bash
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+```
+
+---
+
+## Clone the Project
+
+```bash
+git clone <repository-url>
+cd rule_engine_app
+```
+
+Install dependencies:
+
+```bash
+flutter pub get
+```
+
+---
+
+## Create Firebase Project
+
+1. Open Firebase Console.
+2. Click **Create Project**.
+3. Enter a project name.
+4. Enable Google Analytics (optional).
+5. Create the project.
+
+---
+
+## Enable Authentication
+
+Navigate to:
+
+```text
+Firebase Console
+→ Authentication
+→ Sign-in Method
+→ Email/Password
+```
+
+Enable:
+
+```text
+Email/Password Authentication
+```
+
+---
+
+## Create Firestore Database
+
+Navigate to:
+
+```text
+Firebase Console
+→ Firestore Database
+```
+
+Create a database in:
+
+```text
+Production Mode
+```
+
+Select the closest region to your users.
+
+---
+
+## Configure FlutterFire
+
+From the project root:
+
+```bash
+flutterfire configure
+```
+
+Select:
+
+* Firebase Project
+* Android App
+* iOS App
+* Web App (optional)
+
+The command generates:
+
+```text
+lib/firebase_options.dart
+```
+
+This file is required by the application.
+
+---
+
+## Android Configuration
+
+Ensure the generated file exists:
+
+```text
+android/app/google-services.json
+```
+
+Verify the following plugin exists in:
+
+```gradle
+android/app/build.gradle.kts
+```
+
+```kotlin
+plugins {
+    id("com.google.gms.google-services")
+}
+```
+
+---
+
+## iOS Configuration
+
+For iOS, ensure:
+
+```text
+ios/Runner/GoogleService-Info.plist
+```
+
+exists after FlutterFire configuration.
+
+Install CocoaPods dependencies:
+
+```bash
+cd ios
+pod install
+cd ..
+```
+
+---
+
+## Firestore Data Structure
+
+The application stores user data under:
+
+```text
+users/{uid}/rules
+users/{uid}/executions
+```
+
+Example:
+
+```text
+users
+ └─ userId
+     ├─ rules
+     │   └─ ruleDocument
+     └─ executions
+         └─ executionDocument
+```
+
+---
+
+## Run the Application
+
+Start the app:
+
+```bash
+flutter run
+```
+
+For a specific device:
+
+```bash
+flutter devices
+
+flutter run -d <device-id>
+```
+
+---
+
+## Build Release APK
+
+```bash
+flutter build apk --release
+```
+
+Build App Bundle:
+
+```bash
+flutter build appbundle --release
+```
+
+---
+
+## Build iOS Release
+
+```bash
+flutter build ios --release
+```
+
+or
+
+```bash
+flutter build ipa
+```
+
+---
+
+## Common Issues
+
+### Firebase Not Initialized
+
+Ensure:
+
+```dart
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+```
+
+exists in `main.dart`.
+
+### flutterfire Command Not Found
+
+Reinstall FlutterFire CLI:
+
+```bash
+dart pub global activate flutterfire_cli
+```
+
+and ensure the pub-cache bin directory is added to PATH.
+
+### Firestore Permission Denied
+
+Verify Authentication is enabled and Firestore Security Rules allow authenticated users to access only their own data.
+
+Example development rule:
+
+```javascript
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null &&
+                         request.auth.uid == userId;
+    }
+  }
+}
+```
+
+---
+
+## Environment Used
+
+```text
+Flutter 3.41.4
+Dart 3.11.1
+Firebase Auth
+Cloud Firestore
+GetX
+GetStorage
+```
+
+
 ## Overview
 
 This app provides a workflow for:
